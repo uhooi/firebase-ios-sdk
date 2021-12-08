@@ -127,10 +127,6 @@ let package = Package(
       name: "FirebaseStorage",
       targets: ["FirebaseStorage"]
     ),
-    .library(
-      name: "FirebaseStorageSwift-Beta",
-      targets: ["FirebaseStorageSwift"]
-    ),
   ],
   dependencies: [
     .package(
@@ -425,7 +421,7 @@ let package = Package(
       name: "FirebaseStorageCombineSwift",
       dependencies: [
         "FirebaseStorage",
-        "FirebaseStorageSwift",
+        "FirebaseStorageObjC",
       ],
       path: "FirebaseCombineSwift/Sources/Storage"
     ),
@@ -974,7 +970,7 @@ let package = Package(
       ]
     ),
     .target(
-      name: "FirebaseStorage",
+      name: "FirebaseStorageObjC",
       dependencies: [
         "FirebaseCore",
         .product(name: "GTMSessionFetcherCore", package: "GTMSessionFetcher"),
@@ -991,15 +987,15 @@ let package = Package(
     ),
     .testTarget(
       name: "StorageUnit",
-      dependencies: ["FirebaseStorage", "OCMock", "SharedTestUtilities"],
+      dependencies: ["FirebaseStorageObjC", "OCMock", "SharedTestUtilities"],
       path: "FirebaseStorage/Tests/Unit",
       cSettings: [
         .headerSearchPath("../../.."),
       ]
     ),
     .target(
-      name: "FirebaseStorageSwift",
-      dependencies: ["FirebaseStorage"],
+      name: "FirebaseStorage",
+      dependencies: ["FirebaseStorageObjC"],
       path: "FirebaseStorageSwift/Sources"
     ),
     .testTarget(
@@ -1031,7 +1027,7 @@ let package = Package(
                 condition: .when(platforms: [.iOS, .tvOS])),
         "FirebaseRemoteConfig",
         "FirebaseStorage",
-        "FirebaseStorageSwift",
+        "FirebaseStorageObjC",
         .product(name: "nanopb", package: "nanopb"),
       ],
       path: "SwiftPMTests/swift-test"
