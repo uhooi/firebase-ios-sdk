@@ -43,14 +43,6 @@ struct Constants {
     init() { fatalError() }
   }
 
-  /// The text added to the README for a product if it contains Resources. The empty line at the end
-  /// is intentional.
-  static let resourcesRequiredText = """
-  You'll also need to add the resources in the Resources
-  directory into your target's main bundle.
-
-  """
-
   // Make the struct un-initializable.
   @available(*, unavailable)
   init() { fatalError() }
@@ -654,23 +646,6 @@ struct ZipBuilder {
     }
 
     result += "\n" // Necessary for Resource message to print properly in markdown.
-
-    // Check if there is a Resources directory, and if so, add the disclaimer to the dependency
-    // string.
-    do {
-      let fileManager = FileManager.default
-      let resourceDirs = try fileManager.recursivelySearch(for: .directories(name: "Resources"),
-                                                           in: dir)
-      if !resourceDirs.isEmpty {
-        result += Constants.resourcesRequiredText
-        result += "\n" // Separate from next pod in listing for text version.
-      }
-    } catch {
-      fatalError("""
-      Tried to find Resources directory for \(podName) in order to build the README, but an error
-      occurred: \(error).
-      """)
-    }
 
     return result
   }

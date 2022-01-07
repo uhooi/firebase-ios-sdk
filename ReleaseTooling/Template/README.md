@@ -36,25 +36,20 @@ To integrate a Firebase SDK with your app:
    [static frameworks](https://www.raywenderlich.com/65964/create-a-framework-for-ios)
    which cannot be embedded into your application's bundle.*
 
-7. If the SDK has resources, go into the Resources folders, which will be in
-   the SDK folder. Drag all of those resources into the Project Navigator, just
-   like the frameworks, again making sure that the target you want to add these
-   resources to has a checkmark next to it, and that you've selected "Copy items
-   if needed".
-8. Add the -ObjC flag to "Other Linker Settings":
+7. Add the -ObjC flag to "Other Linker Settings":
   a. In your project settings, open the Settings panel for your target
   b. Go to the Build Settings tab and find the "Other Linker Flags" setting
      in the Linking section.
   c. Double-click the setting, click the '+' button, and add "-ObjC" (without
      quotes)
-9. Drag the `Firebase.h` header in this directory into your project. This will
+8. Drag the `Firebase.h` header in this directory into your project. This will
    allow you to `#import "Firebase.h"` and start using any Firebase SDK that you
    have.
-10. If you're using Swift or want to use modules from Objective C, drag
+9. If you're using Swift or want to use modules from Objective C, drag
    `module.modulemap` into your project and update the
    "User Header Search Paths" in your project's Build Settings to include the
    directory that contains the added module map.
-11. You're done! Compile your target and start using Firebase.
+10. You're done! Compile your target and start using Firebase.
 
 If you want to add another SDK, repeat the steps above with the frameworks for
 the new SDK. You only need to add each framework once, so if you've already
